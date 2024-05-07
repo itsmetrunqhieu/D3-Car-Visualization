@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel Coordinates Plot</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <h1> Car Visualization</h1>
+</head>
+<body>
+    <hr class="divider">
+		<div class="row padding" >
+			<div class="col span_24">
+				<!-- <h3 class="align-center">Parallel Coordinates Plot</h3> -->
+				<div class="pcp-plot" style="float:left; max-width: 900px">
+					<div id="selector">
+						Choose the attributes you want to explore <br>
+						Categorical attributes:  
+						<input onchange="on_select_attr('make')" id='make' type="checkbox" name="make" value="make" checked> make
+						<input onchange="on_select_attr('fuel-type')" type="checkbox" name="fuel-type" id='fuel-type' value="fuel-type"> fuel-type
+						<input onchange="on_select_attr('fuel-system')" type="checkbox" name="fuel-system" id='fuel-system' value="fuel-system"> fuel-system
+						<input onchange="on_select_attr('symboling')" type="checkbox" name="symboling" id='symboling' value="symboling"> symboling
+						<input onchange="on_select_attr('aspiration')" type="checkbox" name="aspiration" id='aspiration' value="aspiration"> aspiration
+						<input onchange="on_select_attr('num-of-doors')" type="checkbox" name="num-of-door" id='num-of-door' value="num-of-door"> num-of-door
+						<input onchange="on_select_attr('body-style')" type="checkbox" name="body-style" id='body-style' value="body-style"> body-style
+						<input onchange="on_select_attr('drive-wheels')" type="checkbox" name="drive-wheels" id='drive-wheels' value="drive-wheels"> drive-wheels
+						<input onchange="on_select_attr('engine-location')" type="checkbox" name="engine-location" id='engine-location' value="engine-location"> engine-location
+						<input onchange="on_select_attr('engine-type')" type="checkbox" name="engine-type" id='engine-type' value="engine-type"> engine-type
+						
+						<br>
+						Metric attributes: 
+						<input onchange="on_select_attr('length')" type="checkbox" name="length" value="length" id='length'checked> length
+						<input onchange="on_select_attr('width')" type="checkbox" name="width" value="width" id='width'checked width
+						<input onchange="on_select_attr('curb-weight')" type="checkbox" name="curb-weight" value="curb-weight" id='curb-weight'checked> curb-weight
+						<input onchange="on_select_attr('num-of-cylinders')" type="checkbox" name="num-of-cylinders" value="num-of-cylinders" id='num-of-cylinders'checked> num-of-cylinders
+						<input onchange="on_select_attr('engine-size')" type="checkbox" name="engine-size" value="engine-size" id='engine-size'checked> engine-size
+						<input onchange="on_select_attr('compression-ratio')" type="checkbox" name="compression-ratio" value="compression-ratio" id='compression-ratio' checked> compression-ratio
+						<input onchange="on_select_attr('horsepower')" type="checkbox" name="horsepower" value="horsepower" id='horsepower' checked> horsepower
+						<input onchange="on_select_attr('city-mpg')" type="checkbox" name="city-mpg" value="city-mpg" id='city-mpg'checked> city-mpg
+						<input onchange="on_select_attr('price')" type="checkbox" name="price" value="price" id='price'checked> price
+						<input onchange="on_select_attr('normalized-losses')" type="checkbox" name="normalized-losses" value="normalized-losses" id='normalized-losses'> normalized-losses
+						<input onchange="on_select_attr('wheel-base')" type="checkbox" name="wheel-base" value="wheel-base" id='wheel-base'> wheel-base
+						<input onchange="on_select_attr('bore')" type="checkbox" name="bore" value="bore" id='bore'> bore
+						<input onchange="on_select_attr('stroke')" type="checkbox" name="stroke" value="stroke" id='stroke'> stroke
+						<input onchange="on_select_attr('peak-rpm')" type="checkbox" name="peak-rpm" value="peak-rpm" id='peak-rpm'> peak-rpm
+						<input onchange="on_select_attr('highway-mpg')" type="checkbox" name="highway-mpg" value="highway-mpg" id='highway-mpg'> highway-mpg</div>
+					
+					<div id="pcp"> </div>
+				</div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="ParallelCoordinate.js"></script>
+</body>
+</html>

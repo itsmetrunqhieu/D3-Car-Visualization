@@ -1,0 +1,38 @@
+body {
+    font: 10px sans-serif;
+}
+
+.background path {
+    fill: none;
+    stroke: #ddd;
+    shape-rendering: crispEdges;
+}
+
+.foreground path {
+    fill: none;
+    stroke: steelblue;
+    stroke-opacity: 0.7;
+}
+
+.brush .extent {
+    fill-opacity: 0.3;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.title {
+    fill: black;
+    text-anchor: middle;
+    font-weight: bold;
+}
