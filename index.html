@@ -4,10 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parallel Coordinates Plot</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <h1> Car Visualization</h1>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/whhg.css" />
 </head>
 <body>
+	<!--  LOGOTYPE LINE  -->
+	<div id="Head" class="container">
+		<div class="row">
+			<div class="col span_16">
+				<h1 id="Domain">Cars Visualization<br>
+			</div>
+		</div>
+	</div>
+	<!-- END OF LOGOTYPE LINE  -->
+	<!-- START OF STATS LINE  -->
+	<div id="Stats" class="container">
+		<div class="row"> 
+			<div class="col span_12"><b class="value" id="n_cars">205</b><i class="info">Cars</div>
+			<div class="col span_12"><b class="value" id="n_vars">25</b><i class="info">Variables</i></div>
+		</div>
+	</div>
+	<!-- END OF STATS LINE  -->
+	<!-- CONTENT -->
+	<div id="Content" class="container">
+		<div class="row special">
+			<div class="col span_24">
+				<div id="legend">
+					<svg width="850" height="90">
+						<g class="legend" id="[object Object]" transform="translate(0,0)">
+							<circle cy="10" cx="10" r="7" fill="#0a72ff"></circle>
+							<text class="legend_text" x="22" y="14">alfa-romero</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(0,22)">
+							<circle cy="10" cx="10" r="7" fill="#fcac5c"></circle>
+							<text class="legend_text" x="22" y="14">audi</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(0,44)">
+							<circle cy="10" cx="10" r="7" fill="#7ec47e"></circle>
+							<text class="legend_text" x="22" y="14">bmw</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(108,0)">
+							<circle cy="10" cx="10" r="7" fill="#e47474"></circle>
+							<text class="legend_text" x="22" y="14">chevrolet</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(108,22)">
+							<circle cy="10" cx="10" r="7" fill="#ccb4e4"></circle>
+							<text class="legend_text" x="22" y="14">dodge</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(108,44)">
+							<circle cy="10" cx="10" r="7" fill="#b48e87"></circle>
+							<text class="legend_text" x="22" y="14">honda</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(216,0)">
+							<circle cy="10" cx="10" r="7" fill="#f4bfe3"></circle>
+							<text class="legend_text" x="22" y="14">isuzu</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(216,22)">
+							<circle cy="10" cx="10" r="7" fill="#bcbcbc"></circle>
+							<text class="legend_text" x="22" y="14">jaguar</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(216,44)">
+							<circle cy="10" cx="10" r="7" fill="#d4d570"></circle>
+							<text class="legend_text" x="22" y="14">mazda</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(308,0)">
+							<circle cy="10" cx="10" r="7" fill="#97e4eb"></circle>
+							<text class="legend_text" x="22" y="14">mercedes-benz</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(308,22)">
+							<circle cy="10" cx="10" r="7" fill="#8ebcdc"></circle>
+							<text class="legend_text" x="22" y="14">mercury</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(308,44)">
+							<circle cy="10" cx="10" r="7" fill="#fc8d2a"></circle>
+							<text class="legend_text" x="22" y="14">mitsubishi</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(432,0)">
+							<circle cy="10" cx="10" r="7" fill="#56b256"></circle>
+							<text class="legend_text" x="22" y="14">nissan</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(432,22)">
+							<circle cy="10" cx="10" r="7" fill="#d83536"></circle>
+							<text class="legend_text" x="22" y="14">peugot</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(432,44)">
+							<circle cy="10" cx="10" r="7" fill="#b48cd0"></circle>
+							<text class="legend_text" x="22" y="14">plymouth</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(540,0)">
+							<circle cy="10" cx="10" r="7" fill="#97675b"></circle>
+							<text class="legend_text" x="22" y="14">porsche</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(540,22)">
+							<circle cy="10" cx="10" r="7" fill="#f1b4dc"></circle>
+							<text class="legend_text" x="22" y="14">renault</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(540,44)">
+							<circle cy="10" cx="10" r="7" fill="#848484"></circle>
+							<text class="legend_text" x="22" y="14">saab</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(648,0)">
+							<circle cy="10" cx="10" r="7" fill="#c4c434"></circle>
+							<text class="legend_text" x="22" y="14">subaru</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(648,22)">
+							<circle cy="10" cx="10" r="7" fill="#4eccdc"></circle>
+							<text class="legend_text" x="22" y="14">toyota</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(648,44)">
+							<circle cy="10" cx="10" r="7" fill="#3180bb"></circle>
+							<text class="legend_text" x="22" y="14">volkswagen</text>
+						</g>
+						<g class="legend" id="[object Object]" transform="translate(756,0)">
+							<circle cy="10" cx="10" r="7" fill="#f68000"></circle>
+							<text class="legend_text" x="22" y="14">volvo</text>
+						</g>
+					</svg>
+				</div> 
+			</div>
+		</div>
+
+		
+		 <!-- end of row -->
     <hr class="divider">
 		<div class="row padding" >
 			<div class="col span_24">
@@ -48,6 +167,6 @@
 					<div id="pcp"> </div>
 				</div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="ParallelCoordinate.js"></script>
+    <script src="js/ParallelCoordinate.js"></script>
 </body>
 </html>

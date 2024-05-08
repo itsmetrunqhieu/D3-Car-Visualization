@@ -1,0 +1,139 @@
+/*******************************************
+ *
+ *  Layout
+ *
+ *******************************************/
+ .axis path,
+ .axis line {
+   fill: none;
+   stroke: #000;
+   shape-rendering: crispEdges;
+ }
+ 
+ .dot {
+   stroke: #000;
+ }
+ 
+ .tooltip {
+   position: absolute;
+   width: 200px;
+   height: 28px;
+   pointer-events: none;
+ }
+ body{ background-repeat:no-repeat; background-position: top center; background-attachment: fixed;}
+ .container{ max-width: 980/*980px*/; } /* Can be wider */
+ 
+ .padding{ padding:0 2%; }
+ 
+ #Head{ padding:49px 0 35px 0; }
+     #Action{ margin-top:8px; }
+ 
+ #Stats{ padding:0 1.50306% 13px 1.50306%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; margin-bottom:-14px; }
+     #Stats .col{ margin-left:0; background:url(../images/stats_div.png) no-repeat right 15px; padding:22px 0 25px 0; }
+     #Stats .col:last-child{ background:none; }
+     #Stats .span_3{ width:12.5%; }
+     #Stats .span_4{ width:16.666666666%; }
+     #Stats .span_6{ width:25%; }
+     #Stats .span_8{ width:33.333333333%; }
+     #Stats .span_12{ width:50%; }
+     #Stats.stats-ad{ padding:23px 1.50306% 7px 1.50306%; opacity:1;}
+     #Stats .value{ display:block; width:100%; text-align:center; margin:0 0 25px 0; line-height:1em; }
+     #Stats .info{ display:block; width:100%; text-align:center; }
+ 
+ #Content{ -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; position: relative;  margin-bottom:-26px; z-index: 999;}
+     /*#Content .row{ padding:0 1.50306% 20px 1.50306%; }*/
+     #Content .special{ padding:30px 8%; margin:0 0 37px 0; }	
+ 
+ #Add{ padding:15px 0; }
+     #Add hr{ height:3px; background:none; border-width:1px 0 0 0; border-color:#999; margin:0px 0 3px 0; }
+   
+ 
+ /*******************************************
+  *
+  *  Colors
+  *
+  *******************************************/
+ #Stats{ background:#CC333F; color:white; border-top:1px solid #D65963; }
+     #Stats *{ color:white; }
+     #Stats .value{ text-shadow:0 2px 1px #AD2B35;}
+     #Stats .info{ color: #F0C2C6; text-shadow:0 1px 0px #AD2B35;}
+ #Content{ background:white; }
+ 
+ 
+ #Domain, 
+ #Domain a{ color:rgb(52, 44, 44); }
+ #Domain span{ color:#ccc; }
+ 
+ #Add-domains a.title,
+ #Add-domains .more{ color:#ccc; }	
+     #Add-domains .action a,
+     #Add-domains a.title:hover{ color:#fff; }	
+
+ /*******************************************
+  *
+  *   Boxes, etc.
+  *
+  *******************************************/
+ #Domain{ margin-bottom:0; font-size:38px; font-family: 'Open Sans', sans-serif; font-weight:bold;  }
+     #Domain a{  text-decoration: none; }
+     #Domain span{ display:block; margin-top:-12px; font-size:15px; text-transform: none; font-family: 'Open Sans', sans-serif; font-weight:normal; }
+ 
+ #Stats{ }
+     #Stats .value{ font-size:48px; font-weight:bold; }
+     #Stats .info{ line-height:1.2em; font-weight:bold; font-style:normal; }
+     #Stats h1{ font-weight:bold; text-transform: uppercase; position:relative; top:-4px; margin-bottom:25px;}
+ 
+ .divider{ background: #1B1B1B; border:0 none; display: block; height:10px; margin:10px 0 30px 0;}
+  
+ /*******************************************
+  *
+  *  Parallel Coordinate plot
+  *
+  *******************************************/
+body {
+    font: 10px sans-serif;
+}
+
+.background path {
+    fill: none;
+    stroke: #ddd;
+    shape-rendering: crispEdges;
+}
+
+.foreground path {
+    fill: none;
+    stroke: steelblue;
+    stroke-opacity: 0.7;
+}
+
+.brush .extent {
+    fill-opacity: 0.3;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.title {
+    fill: black;
+    text-anchor: middle;
+    font-weight: bold;
+}
+.axis text {
+    pointer-events: none; 
+    fill: #000; 
+    font-weight: bold; 
+}
+
+.foreground path {
+    stroke-opacity: 0.5; 
+}
