@@ -7,9 +7,10 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         });
     });
 
-    // Helper function to update dimensions
     function getDimensions() {
-        return ['make', 'compression-ratio', 'city-mpg', 'num-of-cylinders', 'curb-weight', 'engine-size', 'length', 'horsepower', 'width', 'price'].concat(
+        return ['make','compression-ratio', 'city-mpg', 'num-of-cylinders', 'curb-weight', 'engine-size', 'length', 'horsepower', 'width', 'price'].filter(key =>
+            document.getElementById(key) && document.getElementById(key).checked
+        ).concat(
             Object.keys(data[0]).filter(key => 
                 document.getElementById(key) && document.getElementById(key).checked && !['make', 'compression-ratio', 'city-mpg', 'num-of-cylinders', 'curb-weight', 'engine-size', 'length', 'horsepower', 'width', 'price'].includes(key)
             )
@@ -17,26 +18,30 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
     }
 
     let dimensions = getDimensions();
-
     const margin = { top: 50, right: 10, bottom: 10, left: 10 },
           width = 960 - margin.left - margin.right,
           height = 500 - margin.top - margin.bottom;
 
     const x = d3.scalePoint()
                 .range([0, width])
-                .padding(1);
+                .padding(1),
+          dragging = {};
 
-    let y = {};
-    let brushes = {};
+    let y = {},
+        brushes = {};
 
-    // Define color scale for car brands
+    const svg = d3.select("#pcp").append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", `translate(${margin.left},${margin.top})`);
+
     const color = d3.scaleOrdinal(d3.schemeCategory10);
 
     function setupAxes() {
         dimensions = getDimensions();
         x.domain(dimensions);
 
-        y = {};
         dimensions.forEach(dim => {
             if (dim === 'make' || typeof data[0][dim] === 'string') {
                 y[dim] = d3.scalePoint()
@@ -52,23 +57,36 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
                               .on("brush", brush);
         });
 
-        svg.selectAll(".dimension").remove(); // Remove old dimensions
+        svg.selectAll(".dimension").remove();
 
         const g = svg.selectAll(".dimension")
                      .data(dimensions)
                      .enter().append("g")
                      .attr("class", "dimension")
-                     .attr("transform", d => `translate(${x(d)})`);
+                     .attr("transform", d => `translate(${x(d)})`)
+                     .call(d3.drag()
+                        .on("start", function(event, d) {
+                            // Prevent drag if it's a brush event
+                            if (event.sourceEvent.type === "brush") return;
+                            dragging[d] = x(d);
+                        })
+                        .on("drag", function(event, d) {
+                            // Prevent drag if it's a brush event
+                            if (event.sourceEvent.type === "brush") return;
+                            dragging[d] = Math.min(width, Math.max(0, event.x));
+                            dimensions.sort((a, b) => position(a) - position(b));
+                            x.domain(dimensions);
+                            g.attr("transform", d => `translate(${position(d)})`);
+                            svg.selectAll(".foreground path").attr("d", path);
+                        })
+                        .on("end", function(event, d) {
+                            // Prevent drag if it's a brush event
+                            if (event.sourceEvent.type === "brush") return;
+                            delete dragging[d];
+                            d3.select(this).transition().duration(500).attr("transform", `translate(${x(d)})`);
+                            svg.selectAll(".foreground path").transition().duration(500).attr("d", path);
+                        }));
 
-        // Add titles for displayed columns
-        g.filter(d => dimensions.indexOf(d) > -1) // Filter out the 'make' column
-         .append("text")
-         .attr("class", "column-title")
-         .attr("y", -25)
-         .style("text-anchor", "middle")
-         .text(d => d.charAt(0).toUpperCase() + d.slice(1).replace(/-/g, ' '));
-
-        // Add axes and brushes for all columns
         dimensions.forEach(dim => {
             g.filter(d => d === dim)
              .append("g")
@@ -77,7 +95,31 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
              .append("text")
              .style("text-anchor", "middle")
              .attr("y", -9)
-             .text(d => d.charAt(0).toUpperCase() + d.slice(1).replace(/-/g, ' '));
+             .text(d => d.charAt(0).toUpperCase() + d.slice(1).replace(/-/g, ' '))
+             // Add drag behavior to the text title
+             .call(d3.drag()
+                .on("start", function(event, d) {
+                    // Prevent drag if it's a brush event
+                    if (event.sourceEvent.type === "brush") return;
+                    dragging[d] = x(d);
+                })
+                .on("drag", function(event, d) {
+                    // Prevent drag if it's a brush event
+                    if (event.sourceEvent.type === "brush") return;
+                    dragging[d] = Math.min(width, Math.max(0, event.x));
+                    dimensions.sort((a, b) => position(a) - position(b));
+                    x.domain(dimensions);
+                    g.attr("transform", d => `translate(${position(d)})`);
+                    svg.selectAll(".foreground path").attr("d", path);
+                })
+                .on("end", function(event, d) {
+                    // Prevent drag if it's a brush event
+                    if (event.sourceEvent.type === "brush") return;
+                    delete dragging[d];
+                    d3.select(this.parentNode).transition().duration(500).attr("transform", `translate(${x(d)})`);
+                    svg.selectAll(".foreground path").transition().duration(500).attr("d", path);
+                })
+             );
 
             g.filter(d => d === dim)
              .append("g")
@@ -91,21 +133,24 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         redrawLines();
     }
 
-    const svg = d3.select("#pcp").append("svg")
-                  .attr("width", width + margin.left + margin.right)
-                  .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                  .attr("transform", `translate(${margin.left},${margin.top})`);
-
     function redrawLines() {
-        svg.selectAll(".foreground path").remove(); // Remove old paths
+        svg.selectAll(".foreground path").remove();
         const foreground = svg.append("g")
                               .attr("class", "foreground")
                               .selectAll("path")
                               .data(data)
                               .enter().append("path")
-                              .attr("d", d => d3.line()(dimensions.map(p => [x(p), y[p](d[p])])))
-                              .style("stroke", d => color(d.make)); // Use color scale for car brands
+                              .attr("d", path)
+                              .style("stroke", d => color(d.make));
+    }
+
+    function path(d) {
+        return d3.line()(dimensions.map(p => [position(p), y[p](d[p])]));
+    }
+
+    function position(d) {
+        var v = dragging[d];
+        return v == null ? x(d) : v;
     }
 
     function brush() {
@@ -131,10 +176,13 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         });
     }
 
-    // Initial setup
     setupAxes();
 
-    window.on_select_attr = function(attribute) {
-        setupAxes();
-    };
+    Object.keys(data[0]).forEach(key => {
+        const checkbox = document.getElementById(key);
+        if (checkbox) {
+            checkbox.addEventListener('change', setupAxes);
+        }
+    });
+
 });
