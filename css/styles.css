@@ -68,13 +68,17 @@
  #Add-domains .more{ color:#ccc; }	
      #Add-domains .action a,
      #Add-domains a.title:hover{ color:#fff; }	
-
+ select, textarea, input[type="text"]{ border:3px solid #e3e3e3; color: #555555; background-color: #ffffff; }
+ textarea:focus,
+ input[type="text"]:focus { border-color: #CC333F; }	
+ .error{ background-color:#FFD1D1!important; }
+ label span{ display:none; color:red; }
  /*******************************************
   *
   *   Boxes, etc.
   *
   *******************************************/
- #Domain{ margin-bottom:0; font-size:38px; font-family: 'Open Sans', sans-serif; font-weight:bold;  }
+ #Domain{ margin-bottom:0; font-size:38px; font-family: 'Open Sans', sans-serif; font-weight:bold; }
      #Domain a{  text-decoration: none; }
      #Domain span{ display:block; margin-top:-12px; font-size:15px; text-transform: none; font-family: 'Open Sans', sans-serif; font-weight:normal; }
  
@@ -84,7 +88,29 @@
      #Stats h1{ font-weight:bold; text-transform: uppercase; position:relative; top:-4px; margin-bottom:25px;}
  
  .divider{ background: #1B1B1B; border:0 none; display: block; height:10px; margin:10px 0 30px 0;}
-  
+
+ /*******************************************
+  *
+  *  Forms
+  *
+  *******************************************/
+  #Offer{ padding:0 0 20px 0; }
+ label, input, button, select, textarea { font-size: 12px; font-weight: normal;  line-height: 20px; }
+ input, button, select, textarea { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+ label { display: block;  margin-bottom: 5px; }
+ 
+ select, textarea, input[type="text"]{ display: inline-block; 
+     height: 36px; padding: 4px 2%; margin-bottom: 15px; font-size: 14px; line-height: 20px; width: 100%; 
+     vertical-align: middle; }
+ textarea{ height:auto; }
+ textarea:focus,
+ input[type="text"]:focus { outline: 0; }
+ 
+ input[type="radio"], input[type="checkbox"] { margin: 4px 0 0; margin-top: 1px \9; line-height: normal; }
+ input[type="button"], input[type="radio"], input[type="checkbox"] {width: auto; }
+ select{  line-height: 36px; }
+ select { background-color: #ffffff; }
+ 
  /*******************************************
   *
   *  Parallel Coordinate plot

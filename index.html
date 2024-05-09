@@ -124,8 +124,6 @@
 				</div> 
 			</div>
 		</div>
-
-		
 		 <!-- end of row -->
     <hr class="divider">
 		<div class="row padding" >
@@ -166,7 +164,52 @@
 					
 					<div id="pcp"> </div>
 				</div>
+				<!-- Choose attributes for scatter plot: -->
+
+				Choose the attributes you want to explore <br>
+				<div class="scatter-plot" style="float:left">
+					Choose X-Axis:   <select style="width: 50%" id="var1" name="var1">
+						<option onclick="on_change_var1('length')" value="length">length</option>
+						<option onclick="on_change_var1('width')" value="width">width</option>
+						<option onclick="on_change_var1('curb-weight')" value="curb-weight">curb-weight</option>
+						<option onclick="on_change_var1('num-of-cylinders')" value="num-of-cylinders">num-of-cylinders</option>
+						<option onclick="on_change_var1('engine-size')" value="engine-size">engine-size</option>
+						<option onclick="on_change_var1('compression-ratio')" value="compression-ratio">compression-ratio</option>
+						<option onclick="on_change_var1('horsepower')" value="horsepower">horsepower</option>
+						<option onclick="on_change_var1('city-mpg')" value="city-mpg">city-mpg</option>
+						<option onclick="on_change_var1('price')" value="price">price</option>
+						<option onclick="on_change_var1('normalized-losses')" value="normalized-losses">normalized-losses</option>
+						<option onclick="on_change_var1('wheel-base')" value="wheel-base">wheel-base</option>
+						<option onclick="on_change_var1('bore')" value="bore">bore</option>
+						<option onclick="on_change_var1('stroke')" value="stroke">stroke</option>
+						<option onclick="on_change_var1('peak-rpm')" value="peak-rpm">peak-rpm</option>
+						<option onclick="on_change_var1('highway-mpg')" value="highway-mpg">highway-mpg</option>	
+					  </select>
+					<br>
+					Choose Y-Axis:   <select style="width: 50%" id="var2" name="var2">
+						<option onclick="on_change_var2('width')" value="width">width</option>
+						<option onclick="on_change_var2('length')" value="length">length</option>
+						<option onclick="on_change_var2('curb-weight')" value="curb-weight">curb-weight</option>
+						<option onclick="on_change_var2('num-of-cylinders')" value="num-of-cylinders">num-of-cylinders</option>
+						<option onclick="on_change_var2('engine-size')" value="engine-size">engine-size</option>
+						<option onclick="on_change_var2('compression-ratio')" value="compression-ratio">compression-ratio</option>
+						<option onclick="on_change_var2('horsepower')" value="horsepower">horsepower</option>
+						<option onclick="on_change_var2('city-mpg')" value="city-mpg">city-mpg</option>
+						<option onclick="on_change_var2('price')" value="price">price</option>
+						<option onclick="on_change_var2('normalized-losses')" value="normalized-losses">normalized-losses</option>
+						<option onclick="on_change_var2('wheel-base')" value="wheel-base">wheel-base</option>
+						<option onclick="on_change_var2('bore')" value="bore">bore</option>
+						<option onclick="on_change_var2('stroke')" value="stroke">stroke</option>
+						<option onclick="on_change_var2('peak-rpm')" value="peak-rpm">peak-rpm</option>
+						<option onclick="on_change_var2('highway-mpg')" value="highway-mpg">highway-mpg</option>	
+					  </select>
+
+					<div id="scatter"></div>
+				</div>
+			</div>
+		</div> <!-- end of row -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="js/ParallelCoordinate.js"></script>
+	<script src="js/ScatterPlot.js"></script>
 </body>
 </html>

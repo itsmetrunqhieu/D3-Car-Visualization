@@ -1,5 +1,6 @@
 d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinWork/cars-visual/data/imports-85.csv").then(data => {
-    data.forEach(d => {
+    data.forEach((d, index) => {
+        d.id = index;  // Assigning an index as a unique identifier
         Object.keys(d).forEach(key => {
             if (!isNaN(parseFloat(d[key]))) {
                 d[key] = parseFloat(d[key]);
@@ -20,7 +21,7 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
     let dimensions = getDimensions();
     const margin = { top: 50, right: 10, bottom: 10, left: 10 },
           width = 960 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
+          height = 600 - margin.top - margin.bottom;
 
     const x = d3.scalePoint()
                 .range([0, width])
@@ -141,7 +142,8 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
                               .data(data)
                               .enter().append("path")
                               .attr("d", path)
-                              .style("stroke", d => color(d.make));
+                              .style("stroke", d => color(d.make))
+                              .style("stroke-opacity", 0.3) ;
     }
 
     function path(d) {
@@ -152,20 +154,38 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         var v = dragging[d];
         return v == null ? x(d) : v;
     }
+    
+    // Initialize an array to track visible data indices
+    let visibleIndices = data.map((_, index) => index);
 
     function brush() {
         const actives = [];
         svg.selectAll(".brush")
-           .filter(function(d) {
-               return d3.brushSelection(this);
-           })
-           .each(function(d) {
-               actives.push({
-                   dimension: d,
-                   extent: d3.brushSelection(this)
-               });
-           });
-        svg.selectAll(".foreground path").style("display", function(d) {
+            .filter(function(d) {
+                return d3.brushSelection(this);
+            })
+            .each(function(d) {
+                actives.push({
+                    dimension: d,
+                    extent: d3.brushSelection(this)
+                });
+            });
+
+        const filteredData = data.filter((d, index) => {
+            const isInside = actives.every(active => {
+                const dim = active.dimension;
+                const extent = active.extent;
+                const scale = y[dim];
+                const value = scale(dim === 'make' ? d[dim] : d[dim]);
+                return extent[0] <= value && value <= extent[1];
+            });
+            if (isInside) visibleIndices.push(index); // Add index to visible list if inside brush
+            return isInside;
+        });
+
+        visibleIndices = filteredData.map(d => d.id); // Update visible indices based on filtered data
+
+        svg.selectAll(".foreground path").style("display", d => {
             return actives.every(active => {
                 const dim = active.dimension;
                 const extent = active.extent;
@@ -174,8 +194,31 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
                 return extent[0] <= value && value <= extent[1];
             }) ? null : "none";
         });
+
+        // Update scatter plot based on brushed data
+        if (window.updateScatterFromBrush) {
+            window.updateScatterFromBrush(filteredData);
+        }
     }
 
+    window.highlightLine = function(id) {
+        svg.selectAll(".foreground path")
+            .style("stroke-opacity", 0.05); // Dim all lines
+        svg.selectAll(".foreground path")
+            .filter(function(d) { return d.id === id && visibleIndices.includes(id); })  // Check if the id is in the visible indices
+            .style("stroke-opacity", 1) // Highlight the line corresponding to the hovered circle
+            .raise(); // Bring to front
+    };
+    
+    window.resetLines = function() {
+        svg.selectAll(".foreground path")
+            .style("stroke-opacity", function(d) {
+                return visibleIndices.includes(d.id) ? 0.3 : 0;  // Only reset opacity for visible lines
+            });
+    };
+    
+    
+    
     setupAxes();
 
     Object.keys(data[0]).forEach(key => {
