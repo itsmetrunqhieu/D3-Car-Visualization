@@ -1,6 +1,6 @@
 d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinWork/cars-visual/data/imports-85.csv").then(data => {
     data.forEach((d, index) => {
-        d.id = index;  // Assigning an index as a unique identifier
+        d.id = index;  
         Object.keys(d).forEach(key => {
             if (!isNaN(parseFloat(d[key]))) {
                 d[key] = parseFloat(d[key]);
@@ -21,7 +21,7 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
     let dimensions = getDimensions();
     const margin = { top: 50, right: 10, bottom: 10, left: 10 },
           width = 960 - margin.left - margin.right,
-          height = 600 - margin.top - margin.bottom;
+          height = 660 - margin.top - margin.bottom;
 
     const x = d3.scalePoint()
                 .range([0, width])
@@ -100,12 +100,10 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
              // Add drag behavior to the text title
              .call(d3.drag()
                 .on("start", function(event, d) {
-                    // Prevent drag if it's a brush event
                     if (event.sourceEvent.type === "brush") return;
                     dragging[d] = x(d);
                 })
                 .on("drag", function(event, d) {
-                    // Prevent drag if it's a brush event
                     if (event.sourceEvent.type === "brush") return;
                     dragging[d] = Math.min(width, Math.max(0, event.x));
                     dimensions.sort((a, b) => position(a) - position(b));
@@ -114,7 +112,6 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
                     svg.selectAll(".foreground path").attr("d", path);
                 })
                 .on("end", function(event, d) {
-                    // Prevent drag if it's a brush event
                     if (event.sourceEvent.type === "brush") return;
                     delete dragging[d];
                     d3.select(this.parentNode).transition().duration(500).attr("transform", `translate(${x(d)})`);
@@ -199,26 +196,26 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         if (window.updateScatterFromBrush) {
             window.updateScatterFromBrush(filteredData);
         }
+        // Update Data table based on brushed data
+        if (window.updateDataTable) {
+            window.updateDataTable(filteredData);
+        }
     }
 
     window.highlightLine = function(id) {
         svg.selectAll(".foreground path")
-            .style("stroke-opacity", 0.05); // Dim all lines
-        svg.selectAll(".foreground path")
-            .filter(function(d) { return d.id === id && visibleIndices.includes(id); })  // Check if the id is in the visible indices
-            .style("stroke-opacity", 1) // Highlight the line corresponding to the hovered circle
-            .raise(); // Bring to front
-    };
+            .style("stroke-opacity", 0.05);  // Dim all lines
     
+        svg.selectAll(".foreground path")
+            .filter(function(d) { return d.id === parseInt(id); })  // Ensure the id is compared correctly
+            .style("stroke-opacity", 1)  // Highlight the line corresponding to the hovered row
+            .raise();  // Bring to front
+    };
     window.resetLines = function() {
         svg.selectAll(".foreground path")
-            .style("stroke-opacity", function(d) {
-                return visibleIndices.includes(d.id) ? 0.3 : 0;  // Only reset opacity for visible lines
-            });
+            .style("stroke-opacity", 0.3);  // Reset opacity for all lines to default
     };
-    
-    
-    
+
     setupAxes();
 
     Object.keys(data[0]).forEach(key => {

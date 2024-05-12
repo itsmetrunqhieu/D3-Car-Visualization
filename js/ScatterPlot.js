@@ -1,6 +1,6 @@
 d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinWork/cars-visual/data/imports-85.csv").then(data => {
     data.forEach((d, index) => {
-        d.id = index;  // Assigning an index as a unique identifier
+        d.id = index;  
         Object.keys(d).forEach(key => {
             if (!isNaN(parseFloat(d[key]))) {
                 d[key] = parseFloat(d[key]);
@@ -8,10 +8,9 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         });
     });
 
-    // Initial scatter plot setup
     const margin = { top: 20, right: 20, bottom: 60, left: 60 },
-          width = 600 - margin.left - margin.right,
-          height = 600 - margin.top - margin.bottom;
+          width = 650 - margin.left - margin.right,
+          height = 650 - margin.top - margin.bottom;
 
     const svg = d3.select("#scatter").append("svg")
                   .attr("width", width + margin.left + margin.right)
@@ -22,7 +21,6 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
     let x = d3.scaleLinear().range([0, width]),
         y = d3.scaleLinear().range([height, 0]);
 
-    // Setup fill colors
     const colors = {
         "selected": "#97a4bc",
         "un-selected":  "#e8eefd",
@@ -50,7 +48,6 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         "volvo" : "#f68000"
     };
 
-    // Axes setup
     const xAxis = svg.append("g")
                      .attr("transform", `translate(0,${height})`),
           yAxis = svg.append("g");
@@ -76,7 +73,7 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
             .style("stroke-width", "1px")
             .on("mouseover", function(event, d) {
                 if (window.highlightLine) {
-                    window.highlightLine(d.id); // Pass the unique identifier
+                    window.highlightLine(d.id); 
                 }
             })
             .on("mouseout", function(event, d) {
@@ -89,8 +86,6 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
         circles.exit().remove();
     }
     
-
-    // Initially, select default axes
     updateAxes("length", "width");
 
     document.getElementById("var1").addEventListener("change", function() {

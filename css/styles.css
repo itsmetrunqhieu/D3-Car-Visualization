@@ -163,3 +163,48 @@ body {
 .foreground path {
     stroke-opacity: 0.5; 
 }
+ /*******************************************
+  *
+  *  Data Table
+  *
+  *******************************************/
+  #data-table {
+    margin: 20px;
+    width: calc(100% - 40px);
+    height: 500px; 
+    overflow-y: scroll; 
+    border: 1px solid #ccc;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: rgb(8, 168, 193); 
+    color: white; 
+    font-weight: bold; 
+}
+
+.data-table tr {
+    transition: background-color 0.3s, font-weight 0.3s; /* Smooth transition for visual effects */
+}
+
+.data-table tr:hover {
+    background-color: rgb(218, 218, 218); /* Grey background on hover */
+    font-weight: bold; /* Bold text on hover */
+}
+
+.data-table th, .data-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+    transition: background-color 0.3s, font-weight 0.3s; /* Ensure the cells also transition smoothly */
+}
