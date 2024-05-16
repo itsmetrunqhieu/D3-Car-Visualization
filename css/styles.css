@@ -194,17 +194,17 @@ body {
 }
 
 .data-table tr {
-    transition: background-color 0.3s, font-weight 0.3s; /* Smooth transition for visual effects */
+    transition: background-color 0.3s, font-weight 0s;
 }
 
 .data-table tr:hover {
-    background-color: rgb(218, 218, 218); /* Grey background on hover */
-    font-weight: bold; /* Bold text on hover */
+    background-color: rgb(218, 218, 218);
+    font-weight: bold; 
 }
 
 .data-table th, .data-table td {
     padding: 8px;
     border: 1px solid #ccc;
     text-align: left;
-    transition: background-color 0.3s, font-weight 0.3s; /* Ensure the cells also transition smoothly */
+    transition: background-color 0.3s, font-weight 0s; 
 }
