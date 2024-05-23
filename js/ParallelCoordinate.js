@@ -1,4 +1,4 @@
-d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinWork/cars-visual/data/imports-85.csv").then(data => {
+d3.csv("https://raw.githubusercontent.com/itsmetrunqhieu/D3-Car-Visualization/main/data/imports-85.csv").then(data => {
     data.forEach((d, index) => {
         d.id = index;  
         Object.keys(d).forEach(key => {
