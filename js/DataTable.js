@@ -30,6 +30,7 @@ function setupDataTable(data) {
 	    { name: "Weight (lbs)", field: "curb-weight", id: "curb-weight", sortable: true, width: 85 },
 	    { name: "Engine-size (cm3)", field: "engine-size", id: "engine-size", sortable: true, width: 115},
 	    { name: "Length (cm)", field: "length", id: "length", sortable: true, width: 80 },
+        { name: "Height (cm)", field: "height", id: "height", sortable: true, width: 80 },
 	    { name: "Horsepower", field: "horsepower", id: "horsepower", sortable: true, width: 90},
 	    { name: "Width (cm)", field: "width", id: "width", sortable: true, width: 80},
 	    { name: "Price ($)", field: "price", id: "price", sortable: true, width: 100}

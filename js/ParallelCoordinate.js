@@ -9,18 +9,18 @@ d3.csv("https://raw.githubusercontent.com/DungLai/dunglai.github.io/master/SwinW
     });
 
     function getDimensions() {
-        return ['make','compression-ratio', 'city-mpg', 'num-of-cylinders', 'curb-weight', 'engine-size', 'length', 'horsepower', 'width', 'price'].filter(key =>
+        return ['make','compression-ratio', 'city-mpg', 'num-of-cylinders', 'curb-weight', 'engine-size', 'length', 'horsepower', 'width', 'price', 'height'].filter(key =>
             document.getElementById(key) && document.getElementById(key).checked
         ).concat(
             Object.keys(data[0]).filter(key => 
-                document.getElementById(key) && document.getElementById(key).checked && !['make', 'compression-ratio', 'city-mpg', 'num-of-cylinders', 'curb-weight', 'engine-size', 'length', 'horsepower', 'width', 'price'].includes(key)
+                document.getElementById(key) && document.getElementById(key).checked && !['make', 'compression-ratio', 'city-mpg', 'num-of-cylinders', 'curb-weight', 'engine-size', 'length', 'horsepower', 'width', 'price','height'].includes(key)
             )
         );
     }
 
     let dimensions = getDimensions();
     const margin = { top: 50, right: 10, bottom: 10, left: 10 },
-          width = 960 - margin.left - margin.right,
+          width = 1000 - margin.left - margin.right,
           height = 660 - margin.top - margin.bottom;
 
     const x = d3.scalePoint()
