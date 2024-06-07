@@ -94,5 +94,7 @@ d3.csv("https://raw.githubusercontent.com/itsmetrunqhieu/D3-Car-Visualization/ma
                 d[key] = parseFloat(d[key]);
             }
         });
+    })
     setupDataTable(data);
 });
+
