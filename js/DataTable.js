@@ -87,5 +87,12 @@ function setupDataTable(data) {
 }
 
 d3.csv("https://raw.githubusercontent.com/itsmetrunqhieu/D3-Car-Visualization/main/data/imports-85.csv").then(data => {
+    data.forEach((d, index) => {
+        d.id = index;  
+        Object.keys(d).forEach(key => {
+            if (!isNaN(parseFloat(d[key]))) {
+                d[key] = parseFloat(d[key]);
+            }
+        });
     setupDataTable(data);
 });
