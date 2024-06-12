@@ -106,7 +106,17 @@ d3.csv("https://raw.githubusercontent.com/itsmetrunqhieu/D3-Car-Visualization/ma
             .attr("r", 5)
             .style("fill", d => colors[d.make.toLowerCase()] || colors['un-selected'])  // Use original color mapping
             .style("stroke", "black")  // Maintain the black border color on update
-            .style("stroke-width", "1px");  // Maintain the stroke width on update
+            .style("stroke-width", "1px")  // Maintain the stroke width on update
+            .on("mouseover", function(event, d) {
+                if (window.highlightLine){
+                    window.highlightLine(d.id);
+                } 
+            })
+            .on("mouseout", function(event, d) {
+                if (window.resetLines) {
+                    window.resetLines();
+                }
+            });
             
         circles.exit().remove();
     };
